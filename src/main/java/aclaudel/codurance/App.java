@@ -11,6 +11,7 @@ public class App {
     public static void main(String[] args) {
         Spark.port(getPort());
         get("/hello", (req, res) -> "Hello World");
+        get("/", (req, res) -> "Welcome");
     }
 
     private static int getPort() {
