@@ -15,3 +15,10 @@ script:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
 - docker tag my-walking-skeleton aclaudel/my-walking-skeleton
 - docker push aclaudel/my-walking-skeleton
+deploy:
+  provider: heroku
+  api_key:
+    secure: EmiMJHbTEpkQFiJDtzIAEK7n1AM9h84l/0h+hpDNnSMcwbGby2EhljkbqWwi84j0QVB9OcrA+Q3QZJhsjfRg193ugelgXowdQzkndhTdIs/dyNUYnTAfGk9YRkZPXV5pJcyZ2lvqtla/oUZ3NvkuULh7k9JmDVMUzGcUx6HFZJekIQJhllhwEW/RaPJM6ivv1C5el7gzmeheyLuEeqbl6TOz74ByGGO6RuGUZ7ANYUUXF6yuDS3cQ93saN8Xe1tDce8dvXuedGc87dpahzH48oQ82ETMKZBkQNSPzuHdvvwJ8LkYNw7C8hkPFyMXrVJPXZ/Xi+u20z0vM2kK6OhKA4mH0rywvjE4cEj+qnh5gtlCCdlpxDCsMgVcXCcHC+fLMtv7N04pySry1bNnla2jGqfHfLnTn5Ormb+u3Hrx0mCWavnEHpDd4dbxD5/r45FTgpj+fWnFhbYslw0FnuMsbNRbpPEXUej3Zk5teB4u0dkCK+4jg3sEOwk5Ot7Bafy8NIw7lRzJD0Bh6g5jZy8Y6qQzt2wvK/9Ut4RFCnUVloOnw/mPqLa+XtXvuogpZbcR2WF5yNsMJJ1Z/0vAuMEfcK5gpvYZ96WSzchIddUPQOboWghB5PQvSU+Jldf4qHEF5FIoM0b7eOGdqSHpkVfuK5TNITbTYsfqaAvL8aAbv2A=
+  app: my-walking-skeleton
+  on:
+    repo: aclaudel/my-walking-skeleton
