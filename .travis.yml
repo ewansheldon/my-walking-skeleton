@@ -1,20 +1,16 @@
 language: java
-
+env:
+  global:
+  - secure: yiURg7RabseeZoGIpf7YLtrwZSLDzqhhTsyz3LIcnKqUt3QF08LBY1dRVg7xN5RBaYkxIjUePKGr5q/ZY+oFw5veSmCQ9Dnu6WH8t+wIyOx/HP44Q8TxDRgmyQMWrLfqa30NQidia6LzyX4UstBURG0Kp9XzK+HsglIQqbzn0WZhmxYR9muk/rxB7a5XR8yN8e6LnAn9ogFrx2G1f3H/prhLj7O9v3f10ulM6BR9itB/fsZpTL5q5lfFFtCTvBCrhmtHeBt2CHars+xk24mj9ZyLKunJ3XtFLMteEI74/wNdkO23q+OUEIdA36aQKYuTQD4lOCNCVr1sdl+KAfWa5/FZ9zemWQUcpnwP6MYCFsfnnQ9KJSR/7EpnE6yI9mLOJZ3Bb9APB9/PLo9qwkOTzNzOALfpzEIzfJqAszXrnuZGwGcPC8E1+FcTieQebDbO0jmPFWrRtHOXEERSe4R6F/a4hWlH2DY6GbU4VzC10qSuZC1sNHX4KcXzDureTbeCN+6nHwwLx7pFE1Tn/5QU39LQPqKvwVNKPRM1ik1qi9nKle8aQx8rf8mHRH7wr8ef+pqbBGi66g31NJ8EL1HfNCBIFVS7LLncyA15j3vx1o4zjh+wTU68x1sI0R+DjLl5wC0xgMmxRfvjeaof9rOCv7En3S+4bLOX5VzMFKwye34=
+  - secure: P88UgMWYDgt97YmnKNnLFNp6N10D8eR6I/JjZPGmp7wUMtBZeRlGaPxyWMPheAOdALb9uCABWG3/12+txzhGAhwiujTdTwy5Z7U56vlY2R/cSUZwll9UAJGzhOUI4TZtKYkLbZ96Sxyoyv8WwSlEmYlBJXYHGCg4UV6gcLSXRRenUTrdETVnVFyJCJJYkxHgVW1FhgBsd0MdiEwMs/bU8TXHQtHUERAmJ7F9yIoEKR48B9q9EeSRuKUdyQSnPEoLV/PttYyWI4nvqXdJT0ozLO33Bs5aDTQFuavXG5frT6WIpb3SYL1tjQ1tPrzjrdUYn7bWqMpWqfGXMcDhY3k1kBwTrtpjCQ7itcMNDSS9dJrkQGFhtLe0IzM1nz99Xq4kotkJnZhPSASxfUGXal7cxkxcuDLpP0A+D4nxZ7i2UIkTRdBnRMaCyQYiMoQ26ySWtTNXyXwBfpw2GBVyu+dmc1cLM+mrwoHoaASTPRVF4VZ4sxK3BF75+rMSwprRMIDRzZKq1l2SnwEDIjZbXhy6Zj9jIQkBCAMVxPjSAiy+BNCIXFNZZcHUhf8SZu2ZBhUxw7/joqawzI+OI57L8Ljq6wPoJ5kWb+XtV7sv/o0ZIF6YzBbqYC34rqGaP4rwrRzRQl/3WwY/2M7bmoYlIn8FgUCMflAqwR0HPH8bNt415EU=
 services:
   - docker
-
 cache:
   directories:
-    - $HOME/.m2
-
+  - "$HOME/.m2"
 install:
   - mvn install
-
 script:
-  - docker build .
-
-deploy:
-  provider: heroku
-  api_key:
-    secure: 6a2cb640-34b7-4f8b-81a6-a5b0f83a00cb
-  app: my-walking-skeleton
+  - docker build -t my-walking-skeleton .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push aclaudel/my-walking-skeleton
