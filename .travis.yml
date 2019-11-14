@@ -13,3 +13,8 @@ install:
 script:
   - docker build .
 
+deploy:
+  provider: heroku
+  api_key:
+    secure: 6a2cb640-34b7-4f8b-81a6-a5b0f83a00cb
+  app: my-walking-skeleton
