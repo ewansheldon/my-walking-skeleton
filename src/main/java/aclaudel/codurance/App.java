@@ -11,7 +11,7 @@ public class App {
     public static void main(String[] args) {
         Spark.port(getPort());
         get("/hello", (req, res) -> "Hello World");
-        get("/", (req, res) -> "Welcome");
+        get("/", (req, res) -> "Welcome to Dev env");
         get("/jose", (req, res) -> "Hola Jose");
     }
 
