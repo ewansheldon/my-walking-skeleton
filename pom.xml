@@ -13,6 +13,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <mainClass>${project.groupId}.App</mainClass>
+        <runtime.directory>${project.build.directory}/runtime</runtime.directory>
+        <runtime.artifact>${project.build.finalName}.jar</runtime.artifact>
     </properties>
 
     <distributionManagement>
@@ -25,22 +27,40 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
+                        <id>download-runtime</id>
                         <goals>
-                            <goal>java</goal>
+                            <goal>copy</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <executableDependency>
-                        <groupId>${project.groupId}</groupId>
-                        <artifactId>${project.artifactId}-with-dependencies</artifactId>
-                    </executableDependency>
-                    <mainClass>${mainClass}</mainClass>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <version>${project.version}</version>
+                            <type>jar</type>
+                        </artifactItem>
+                    </artifactItems>
+                    <outputDirectory>${runtime.directory}</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-jar</argument>
+                        <argument>${runtime.directory}/${runtime.artifact}</argument>
+                    </arguments>
                 </configuration>
             </plugin>
 
@@ -64,6 +84,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
             </plugin>
         </plugins>
