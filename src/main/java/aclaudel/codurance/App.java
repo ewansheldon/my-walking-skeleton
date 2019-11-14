@@ -6,9 +6,18 @@ import static spark.Spark.get;
 
 public class App {
 
+    public static final int DEFAULT_PORT = 80;
+
     public static void main(String[] args) {
-        Spark.port(3000);
+        Spark.port(getPort());
         get("/hello", (req, res) -> "Hello World");
+    }
+
+    private static int getPort() {
+        String port = System.getenv("PORT");
+        if (port != null)
+            return Integer.parseInt(port);
+        return DEFAULT_PORT;
     }
 
 }
