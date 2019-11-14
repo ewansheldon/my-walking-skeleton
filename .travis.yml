@@ -15,5 +15,5 @@ install:
 script:
 - curl https://cli-assets.heroku.com/install.sh | sh
 - heroku container:login
-- heroku container:push web
-- heroku container:release web
+- heroku container:push web --app my-walking-skeleton
+- heroku container:release web --app my-walking-skeleton
