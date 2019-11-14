@@ -1,0 +1,11 @@
+language: java
+
+services:
+  - docker
+
+install:
+  - mvn install
+
+script:
+  - docker build .
+
