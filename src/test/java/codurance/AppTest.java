@@ -9,9 +9,4 @@ class AppTest {
     void run_this_test_and_pass() {
         assertTrue(true);
     }
-
-    @Test
-    void run_this_test_and_fail() {
-        assertTrue(false);
-    }
 }
