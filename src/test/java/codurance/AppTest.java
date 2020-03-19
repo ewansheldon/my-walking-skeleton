@@ -8,6 +8,7 @@ class AppTest {
     @Test
     void run_this_test() {
         System.out.println("this test was run !");
+        System.out.println("this test was really run !");
         assertTrue(true);
     }
 }
