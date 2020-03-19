@@ -13,6 +13,7 @@ public class App {
         get("/hello", (req, res) -> "Hello World");
         get("/", (req, res) -> "Welcome");
         get("/jose", (req, res) -> "Hola Jose");
+        get("/ewan", (req, res) -> "hi ewan");
     }
 
     private static int getPort() {
